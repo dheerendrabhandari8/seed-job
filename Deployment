@@ -1,0 +1,98 @@
+folder('Deployment') {
+    displayName('Deployment')
+    description('Folder for Deployment')
+}
+folder('Deployment/applications') {
+    description('Folder containing all applications for Deployment')
+}
+folder('OT-Microservices/applications/dev') {
+    description('Folder containing all dev environment jobs for Deployment')
+}
+folder('OT-Microservices/applications/dev/attendance') {
+    description('Folder containing all attendance jobs for Deployment')
+}
+folder('OT-Microservices/applications/dev/salary') {
+    description('Folder containing all salary jobs for Deployment')
+}
+folder('OT-Microservices/applications/dev/employee') {
+    description('Folder containing all employee jobs for Deployment')
+}
+folder('OT-Microservices/applications/dev/notification') {
+    description('Folder containing all notifications for Deployment')
+}
+folder('OT-Microservices/applications/dev/frontend') {
+    description('Folder containing all frontend for Deployment')
+}
+pipelineJob('Deployment/applications/dev/attendance/attendance-CI') {
+  definition {
+    cpsScm {
+      scm {
+        git {
+          remote {
+            url("https://gitlab.com/snaatak/avengers-p2/application-repos/attendance.git")
+            credentials("gitlab-token")
+          }
+          branch('feature')
+        }
+      }
+      scriptPath("Jenkinsfile")
+  }
+}
+}
+pipelineJob('OT-Microservices/applications/dev/notification/notification-CI') {
+    definition {
+    cpsScm {
+      scm {
+        git {
+          remote {
+            url("https://gitlab.com/snaatak/avengers-p2/application-repos/notification.git")
+            credentials("gitlab-token")
+          }
+          branch('feature')
+        }
+      }
+      scriptPath("Jenkinsfile")
+  }
+}  
+
+}
+pipelineJob('OT-Microservices/applications/dev/frontend/frontend-CI') {
+  definition {
+    cpsScm {
+      scm {
+        git {
+          remote {
+            url("https://gitlab.com/snaatak/avengers-p2/application-repos/frontend.git")
+            credentials("gitlab-token")
+          }
+          branch('frountend')
+        }
+      }
+   scriptPath("Jenkinsfile")
+  }
+}
+}
+pipelineJob('Deployment/applications/dev/employee/employee-CI') {
+  definition {
+    cpsScm {
+      scm {
+        git {
+          remote {
+            url("https://gitlab.com/piiiyuushh/employee.git")
+            credentials("gitlab_test_token2")
+          }
+          branch('main')
+        }
+      }
+      scriptPath("employee/Jenkinsfile")
+  }
+}
+}
+
+
+
+
+
+
+
+
